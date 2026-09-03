@@ -68,3 +68,28 @@
 ## Git
 - [x] Code committed
 - [x] Changes pushed to feature branch
+
+
+# Day 4 Self-Review Checklist
+
+## EDA
+- [x] Loaded the cleaned employee performance dataset
+- [x] Used `df.describe()` for statistical summary
+- [x] Used `df.info()` to inspect dataset structure
+- [x] Used `df.isnull().sum()` to check missing values
+- [x] Documented 5 observations from the dataset
+- [x] Plotted distributions for all numeric columns
+- [x] Created a correlation heatmap
+- [x] Created top-10 department count plot
+- [x] Wrote a 200-word EDA narrative
+
+## Git
+- [x] Created/used the feature branch
+- [x] Made at least 2 descriptive commits
+- [x] Pushed changes to GitHub
+- [x] Raised pull request
+
+## Validation
+- [x] Code executed successfully
+- [x] Output evidence captured
+- [x] Self-review completed
