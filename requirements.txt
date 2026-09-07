@@ -3,3 +3,4 @@ numpy
 pyarrow
 matplotlib
 seaborn
+scikit-learn
