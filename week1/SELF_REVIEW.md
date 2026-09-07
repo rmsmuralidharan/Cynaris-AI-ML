@@ -93,3 +93,30 @@
 - [x] Code executed successfully
 - [x] Output evidence captured
 - [x] Self-review completed
+
+
+# Day 5 Self-Review Checklist
+
+## Data Visualisation
+- [x] Loaded the cleaned employee performance dataset
+- [x] Displayed basic dataset information
+- [x] Created department-wise employee count visualization
+- [x] Created salary distribution plot
+- [x] Created performance score distribution plot
+- [x] Created correlation heatmap
+- [x] Created experience vs performance scatter plot
+
+## Code Quality
+- [x] Used clear comments
+- [x] Used meaningful variable names
+- [x] Tested the visualization script successfully
+- [x] Captured output screenshots
+
+## Git
+- [x] Made at least 2 descriptive commits
+- [x] Pushed changes to the feature branch
+- [x] Raised/updated pull request
+
+## Validation
+- [x] All visualizations executed successfully
+- [x] Self-review completed
