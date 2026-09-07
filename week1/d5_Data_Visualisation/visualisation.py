@@ -39,3 +39,41 @@ plt.xlabel('performance score')
 plt.ylabel('Frequencey')
 plt.tight_layout()
 plt.show()
+
+
+
+
+## correlation heatmap
+plt.figure(figsize=(8,6))
+
+correlation = df[
+    ['Age', 'Experience_Years', 'Salary', 'Performance_Score']
+].corr()
+
+sns.heatmap(
+    correlation,
+    annot=True,
+    cmap='coolwarm',
+    fmt='.2f'
+)
+
+plt.title('Correlation heatmap')
+plt.tight_layout()
+plt.show()
+
+
+## experience vs performance score
+plt.figure(figsize=(8,6))
+
+sns.scatterplot(
+    data=df,
+    x='Experience_Years',
+    y='Performance_Score'
+)
+
+plt.title('Experience vs Performance_Score')
+plt.xlabel('Experience in years')
+plt.ylabel('performance score')
+
+plt.tight_layout()
+plt.show()
