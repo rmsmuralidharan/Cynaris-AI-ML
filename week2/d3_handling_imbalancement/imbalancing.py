@@ -1,6 +1,7 @@
 import pandas as pd
 from imblearn.over_sampling import RandomOverSampler
 from imblearn.under_sampling import RandomUnderSampler
+from imblearn.over_sampling import SMOTE
 
 ## loading the dataset
 
@@ -60,6 +61,26 @@ print(y_under_sampled.value_counts())
 
 """
 under sampling is not the best approach because it'll delete most of the records
+"""
+
+### 3. class handling using SMOTE
+
+x = df[['Age']]
+smote = SMOTE(random_state=42)
+
+x_smote, y_smote = smote.fit_resample(x,y)
+
+### before smote
+print('\nbefore smote:')
+print(y.value_counts())
+
+### after smote
+print('\nafter smote:')
+print(y_smote.value_counts())
+
+"""
+difference between random over sampling and smote is random over sampling duplicates the data points untill we reach the majority class
+smote synthetically creates a data points near the existing data points
 """
 
 
