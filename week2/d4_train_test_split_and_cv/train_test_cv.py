@@ -1,6 +1,8 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import KFold, cross_val_score
 
 ### load the employee dataset
 df = pd.read_csv('week2/data/merged.csv')
@@ -56,3 +58,30 @@ print(x_test.shape)
 print(x_test.shape)
 
 
+### cross validation techniques = validating the data only on training data and can calculate how well it performs on test data
+### creating a linear regression model for calculating the performance for cross validation
+
+model = LinearRegression(n_jobs=-1)
+
+### kfold - cross validation = used only for regerssion 
+kf = KFold(
+    n_splits=5,
+    shuffle=True,
+    random_state=42
+)
+
+### calculating the performance of the k fold cross validation
+scores = cross_val_score(
+    model,
+    x_train,
+    y_train,
+    cv=kf,
+    scoring='r2'
+)
+
+print("Scores:", scores)
+print("Average R²:", scores.mean())
+
+"""
+StratifiedKFold = used for classification based problems
+"""
