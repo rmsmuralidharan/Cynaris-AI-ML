@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder
+from sklearn.preprocessing import StandardScaler
 
 ### loading the titanic dataset
 df = pd.read_csv('week2/d5_pipeline/data/sythetic_titanic_dataset.csv')
@@ -77,7 +78,8 @@ ordinal_encoder = OrdinalEncoder(
 ordinal_encoded = ordinal_encoder.fit_transform(df[['Sex']])
 
 ordinal_df = pd.DataFrame(
-    ordinal_encoded
+    ordinal_encoded,
+    columns=['Sex']
 )
 
 print('\nordinal encoding:')
@@ -102,16 +104,34 @@ onehot_df = pd.DataFrame(
 
 print(onehot_df.head(5))
 
-### merging the final preprocessed dataset
-df_final = pd.concat([df, ordinal_df, onehot_df], axis=1)
+### feature scaling
 
-df_final = df_final.drop(columns=['Embarked', 'Cabin'])
+numerical_features = ['Age', 'Fare', 'SibSp', 'Parch', 'Pclass']
+
+scaler = StandardScaler()
+
+df_scaled = scaler.fit_transform(df[numerical_features])
+
+df_scaled = pd.DataFrame(df_scaled, columns=numerical_features)
+
+print('\nfeature scaling:')
+print(df_scaled.head(5))
+
+
+
+### merging the final preprocessed dataset
+df_final = pd.concat([df_scaled, ordinal_df, onehot_df, df['Survived']], axis=1)
+
+
+
 
 ### final preprocessed dataset
 
 print('\nbefore preprocessing the dataset:')
 print(df.shape)
+print(df.head(2))
 
 print('\nafter preprocessing the dataset:')
 print(df_final.shape)
+print(df_final.head(2))
 
