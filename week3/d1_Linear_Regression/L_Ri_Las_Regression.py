@@ -160,7 +160,69 @@ print(
 )
 
 
+# Linear Regression
+plt.figure(figsize=(8, 6))
+plt.scatter(y_test, y_pred_lr, alpha=0.5)
+plt.xlabel("Actual Values")
+plt.ylabel("Predicted Values")
+plt.title("Linear Regression - Actual vs Predicted")
+plt.plot([y_test.min(), y_test.max()],
+         [y_test.min(), y_test.max()],
+         linestyle="--")
+plt.show()
 
+
+# Ridge Regression
+plt.figure(figsize=(8, 6))
+plt.scatter(y_test, y_pred_ridge, alpha=0.5)
+plt.xlabel("Actual Values")
+plt.ylabel("Predicted Values")
+plt.title("Ridge Regression - Actual vs Predicted")
+plt.plot([y_test.min(), y_test.max()],
+         [y_test.min(), y_test.max()],
+         linestyle="--")
+plt.show()
+
+
+# Lasso Regression
+plt.figure(figsize=(8, 6))
+plt.scatter(y_test, y_pred_lasso, alpha=0.5)
+plt.xlabel("Actual Values")
+plt.ylabel("Predicted Values")
+plt.title("Lasso Regression - Actual vs Predicted")
+plt.plot([y_test.min(), y_test.max()],
+         [y_test.min(), y_test.max()],
+         linestyle="--")
+plt.show()
+
+# Results
+# -----------------------------
+
+results = []
+
+for name, y_pred in [
+    ("Linear Regression", y_pred_lr),
+    ("Ridge Regression", y_pred_ridge),
+    ("Lasso Regression", y_pred_lasso)
+]:
+    mse = mean_squared_error(y_test, y_pred)
+    rmse = root_mean_squared_error(y_test, y_pred)
+    mae = mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+
+    results.append([name, mse, rmse, mae, r2])
+
+
+# -----------------------------
+# Results table
+# -----------------------------
+
+results_df = pd.DataFrame(
+    results,
+    columns=["Model", "MSE", "RMSE", "MAE", "R²"]
+)
+
+print(results_df)
 
 
 
