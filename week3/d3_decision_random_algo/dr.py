@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from imblearn.over_sampling import SMOTE
+from sklearn.ensemble import RandomForestClassifier
 
 ### importing the dataset
 df = pd.read_csv('week3/d2_logistic_regression/data/students_pass_fail.csv')
@@ -67,8 +68,40 @@ print(
 )
 
 
+# ---------------------------
+# Random forest classifier 
+# ----------------------------
 
 
+### model creation
+
+rf = RandomForestClassifier(
+    n_estimators=100,
+    random_state=42
+)
+
+### model training
+rf.fit(x_train, y_train)
+
+### model prediction
+
+y_pred_rf = rf.predict(x_test)
+
+### model evaluation
+
+rf_Score = accuracy_score(y_test, y_pred_rf)
+
+rf_cr = classification_report(y_test, y_pred_rf)
+
+rf_cm = confusion_matrix(y_test, y_pred_rf)
+
+print('\nFinal report for Random tree classifier:')
+
+print(
+    f"accuracy score: {rf_Score}\n"
+    f"Report: {rf_cr}\n"
+    f"confusion matrix: {rf_cm}"
+)
 
 
 
