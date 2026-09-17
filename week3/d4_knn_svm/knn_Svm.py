@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 
@@ -55,4 +56,43 @@ print(
     f"confusion matrix:\n {cm}"
 
 )
+
+
+# ----------------------
+# SVM Classifier
+#---------------------
+
+### model initialization
+
+s = SVC(
+    kernel='linear',
+    C=3
+)
+
+### model training
+s.fit(x_train_scaled, y_train)
+
+### model predicton
+y_pred_svc = s.predict(x_test_scaled)
+
+
+### model evaluation
+score_svc = accuracy_score(y_test, y_pred_svc)
+
+cr_svc = classification_report(y_test, y_pred_svc)
+
+cm_svc = confusion_matrix(y_test, y_pred_svc)
+
+
+### report
+print('\nSupport Vector Classifier final report:')
+print(
+    f"accuracy score: {score_svc}\n"
+    f"classification report:\n {cr_svc}\n"
+    f"confusion matrix:\n {cm_svc}"
+
+)
+
+
+
 
