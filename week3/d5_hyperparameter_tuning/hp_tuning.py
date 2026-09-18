@@ -129,7 +129,6 @@ print(f"best params: {random_search_knn.best_params_}")
 print(f"best score: {random_search_knn.best_score_}")
 
 
-print('\nfor SVC model:')
 
 param_dist_svc= {
     "C": [0.01, 0.1, 1, 10, 100, 1000],
@@ -155,7 +154,55 @@ print(f"best score: {random_search_svc.best_score_}")
 
 
 
+#### grid search cv
+print('\nGrid Search CV:')
 
+print('\nfor KNN model:')
+
+param_grid = {
+    "n_neighbors": [3, 5, 7, 9, 11],
+    "weights": ["uniform", "distance"],
+    "metric": ["euclidean", "manhattan"],
+    "p": [1, 2]
+}
+
+grid_search_knn = GridSearchCV(
+    estimator=knn,
+    param_grid=param_grid,
+    scoring='accuracy',
+    n_jobs=-1,
+    cv=5
+)
+
+grid_search_knn.fit(x_train_scaled, y_train)
+
+print(f"best params: {grid_search_knn.best_params_}")
+print(f"best score: {grid_search_knn.best_score_}")
+
+
+
+
+print('\nfor SVC model:')
+
+param_grid_svc = {
+    "C": [0.1, 1, 10, 100],
+    "kernel": ["linear", "rbf", "poly"],
+    "gamma": ["scale", "auto"],
+    "degree": [2, 3, 4]
+}
+
+grid_search_svc = GridSearchCV(
+    estimator=s,
+    param_grid=param_grid_svc,
+    scoring="accuracy",
+    n_jobs=-1,
+    cv=5
+)
+
+grid_search_svc.fit(x_train_scaled, y_train)
+
+print(f"best params: {grid_search_svc.best_params_}")
+print(f"best score: {grid_search_svc.best_score_}")
 
 
 
