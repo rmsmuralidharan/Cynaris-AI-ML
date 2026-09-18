@@ -4,6 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.model_selection import RandomizedSearchCV, GridSearchCV
 
 
 
@@ -96,6 +97,62 @@ print(
     f"confusion matrix:\n {cm_svc}"
 
 )
+
+
+print('\nAfter Hyperparameter tuning report:')
+
+print('\nRandom search CV:')
+print('\nFor KNN classifier Model:')
+
+### random searched CV = randomly select the parameters between the range we provide
+
+param_dist = {
+    "n_neighbors": range(1, 31),
+    "weights": ["uniform", "distance"],
+    "metric": ["euclidean", "manhattan", "minkowski"],
+    "p": [1, 2]
+}
+
+random_search_knn = RandomizedSearchCV(
+    estimator=knn,
+    param_distributions=param_dist,
+    n_iter=10,
+    scoring="accuracy",
+    cv=5,
+    random_state=42,
+    n_jobs=-1
+)
+
+random_search_knn.fit(x_train_scaled, y_train)
+
+print(f"best params: {random_search_knn.best_params_}")
+print(f"best score: {random_search_knn.best_score_}")
+
+
+print('\nfor SVC model:')
+
+param_dist_svc= {
+    "C": [0.01, 0.1, 1, 10, 100, 1000],
+    "kernel": ["linear", "rbf", "poly", "sigmoid"],
+    "gamma": ["scale", "auto"],
+    "degree": [2, 3, 4, 5]
+}
+
+random_search_svc = RandomizedSearchCV(
+    estimator=s,
+    param_distributions=param_dist_svc,
+    n_iter=10,
+    scoring="accuracy",
+    random_state=42,
+    n_jobs=-1
+)
+
+random_search_svc.fit(x_train_scaled, y_train)
+
+print('\nfor SVC model:')
+print(f"best params: {random_search_svc.best_params_}")
+print(f"best score: {random_search_svc.best_score_}")
+
 
 
 
