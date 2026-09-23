@@ -3,9 +3,11 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from sklearn.metrics import silhouette_score
+import joblib
+import os
 
 ## loading the data
-df = pd.read_csv('week4/model_serialization/data/Mall_Customers.csv')
+df = pd.read_csv('week4/d3_model_serialization/data/Mall_Customers.csv')
 
 ### data validation
 print('\nshape:')
@@ -164,5 +166,20 @@ plt.ylabel("Spending Score (1-100)")
 plt.title("Customer Segmentation using K-Means")
 plt.show()
 
+
+### Serialize the K-Means model
+
+
+model_path = r"week4/d3_model_serialization/models"
+
+os.makedirs(model_path, exist_ok=True)
+
+# Save K-Means model
+joblib.dump(model, os.path.join(model_path, "customer_segmentation_model.pkl"))
+
+# Save the scaler
+joblib.dump(scaler, os.path.join(model_path, "customer_scaler.pkl"))
+
+print("Model and scaler saved successfully.")
 
 
